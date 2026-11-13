@@ -64,7 +64,7 @@ A plataforma foi projetada como uma aplicação web responsiva em Next.js, adapt
 * **Tela 2.4 — Módulo de Campanhas e Oportunidades:** Identificação de sinergias entre lojas de segmentos complementares, sugerindo vendas cruzadas (cross-selling), campanhas conjuntas e períodos estratégicos.
 * **Tela 2.5 — Assistente Comercial de IA:** Consultor virtual capaz de interpretar o cruzamento entre vendas, comportamento dos consumidores e recompensas para responder questionamentos gerenciais e propor planos de ação personalizados.
 
-Os fluxos visuais e wireframes iniciais encontram-se detalhados em [`./telas-e-prototipos.md`](./telas-e-prototipos.md) e na pasta [`./assets`](./assets).
+Os fluxos visuais e wireframes iniciais encontram-se detalhados em na pasta [`./assets`](./assets).
 
 ---
 
