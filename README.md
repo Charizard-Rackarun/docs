@@ -17,7 +17,7 @@
 6. [Plataforma e Tecnologias Adotadas](#6-plataforma-e-tecnologias-adotadas)
 7. [Incorporação da Tecnologia ou Prática Sorteada](#7-incorporação-da-tecnologia-ou-prática-sorteada)
 8. [Governança e Tratamento de Dados](#8-governança-e-tratamento-de-dados)
-9. [Estrutura dos Repositórios](#9-estrutura-dos-repositórios)
+9. [Estrutura dos Repositórios e Fluxo de Trabalho](#9-estrutura-dos-repositórios-e-fluxo-de-trabalho)
 10. [Equipe e Responsabilidades](#10-equipe-e-responsabilidades)
 
 ---
@@ -93,6 +93,7 @@ Os fluxos visuais e wireframes iniciais encontram-se detalhados em [`./telas-e-p
 | **RNF04** | **Usabilidade** | Interface responsiva e intuitiva, garantindo navegação fluida tanto em smartphones quanto em desktops. |
 | **RNF05** | **Segurança** | Controle de acesso autenticado via tokens e isolamento rigoroso dos dados financeiros e transacionais de cada estabelecimento. |
 | **RNF06** | **Manutenibilidade** | Arquitetura distribuída em camadas desacopladas com tipagem estática no frontend e contratos claros na API REST. |
+| **RNF07** | **Qualidade de Código** | Toda alteração de código deve ser integrada por meio de pull request com revisão obrigatória de outro integrante da equipe (ver [seção 9.1](#91-fluxo-de-trabalho-e-política-de-revisão)). |
 
 ---
 
@@ -167,7 +168,7 @@ flowchart TD
 | Visualização de Dados | Chart.js | Construção de gráficos de desempenho responsivos e de fácil leitura gerencial. |
 | Inteligência Artificial | API de IA Generativa | Processamento de linguagem natural para interpretação de cenários de negócios e geração de recomendações estratégicas. |
 | Prototipação | Figma | Modelagem de interface e validação prévia de fluxos de navegação e usabilidade. |
-| Controle de Versão | Git e GitHub | Rastreabilidade de código, versionamento e suporte ao fluxo de trabalho colaborativo via GitHub Projects. |
+| Controle de Versão e Revisão de Código | Git e GitHub (Pull Requests) | Rastreabilidade de código, versionamento e fluxo colaborativo via GitHub Projects, com pull request e revisão obrigatória antes de qualquer integração à branch principal. |
 
 ---
 
@@ -194,7 +195,7 @@ Todos os dados recebidos por meio de importações de planilhas, formulários de
 
 ---
 
-## 9. Estrutura dos Repositórios
+## 9. Estrutura dos Repositórios e Fluxo de Trabalho
 
 A organização Charizard-Rackarun está estruturada de forma modular nos seguintes repositórios:
 
@@ -203,13 +204,25 @@ A organização Charizard-Rackarun está estruturada de forma modular nos seguin
 * **backend:** API RESTful em Python com FastAPI e integração com PostgreSQL.
 * **analytics-ia:** Pipelines de tratamento em Pandas, scripts analíticos e integração com IA Generativa.
 
+### 9.1 Fluxo de Trabalho e Política de Revisão
+
+Em todos os repositórios, a equipe adota como obrigação o uso de **pull requests com revisão** para integrar qualquer alteração. O fluxo é o seguinte:
+
+1. **Branch própria:** cada tarefa é desenvolvida em uma branch criada a partir da branch principal, sem commits diretos na principal.
+2. **Abertura do pull request:** ao concluir a tarefa, o autor abre um pull request com descrição clara do que foi alterado e do motivo.
+3. **Revisão obrigatória:** outro integrante da equipe revisa o código, comenta pontos de melhoria e aprova ou solicita ajustes. O autor não aprova o próprio pull request.
+4. **Ajustes:** eventuais correções são feitas na mesma branch, atualizando o pull request.
+5. **Merge:** a integração à branch principal só ocorre após a aprovação da revisão.
+
+Essa prática favorece a qualidade e a manutenibilidade do código (RNF06 e RNF07), o compartilhamento de conhecimento entre os integrantes e a rastreabilidade das decisões técnicas via GitHub.
+
 ---
 
 ## 10. Equipe e Responsabilidades
 
 | Integrante | Papel Principal | Responsabilidades |
 | :--- | :--- | :--- |
-| Warly Martins | Tech Lead e Arquitetura | Arquitetura distribuída, modelagem do banco PostgreSQL, API FastAPI e integração de IA. |
-| [Nome Integrante 2] | UI/UX e Frontend | Prototipação no Figma, desenvolvimento das interfaces em Next.js e gráficos Chart.js. |
-| [Nome Integrante 3] | Engenharia de Dados e IA | Pipelines de análise com Pandas, estruturação da pesquisa e prompts de inteligência comercial. |
-| [Nome Integrante 4] | Documentação e Negócios | Especificação de requisitos, governança LGPD, validação de fluxos e apresentação. |
+| Kelwen Lourenço | A confirmar | A confirmar |
+| Carlos | A confirmar | A confirmar |
+| Thiago | A confirmar | A confirmar |
+| Warly Martins | A confirmar | A confirmar |
