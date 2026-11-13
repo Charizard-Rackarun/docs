@@ -119,41 +119,47 @@ A arquitetura da VitrineIA baseia-se em um modelo cliente-servidor distribuído 
 
 ```mermaid
 flowchart TD
-    subgraph Camada_Apresentacao [Camada de Apresentação - Next.js + TypeScript]
-        B2C[Portal do Visitante\nPesquisa QR Code e Recompensas]
-        B2B[Portal do Lojista\nDashboards, Campanhas e Assistente IA]
+    subgraph Camada_Apresentacao ["Camada de Apresentação"]
+        B2C["Portal do Visitante<br/>Pesquisa QR Code e Recompensas"]
+        B2B["Portal do Lojista<br/>Dashboards, Campanhas e Assistente IA"]
     end
 
-    subgraph Camada_Aplicacao [Camada de Aplicação - Python + FastAPI]
-        API[API RESTful Assíncrona\nAutenticação, Validação de Schema e Regras de Negócio]
+    subgraph Camada_Aplicacao ["Camada de Aplicação"]
+        API["API RESTful Assíncrona (FastAPI)<br/>Autenticação, Schema e Regras de Negócio"]
     end
 
-    subgraph Camada_Persistencia [Camada de Persistência]
-        DB[(PostgreSQL\nDados Comerciais, Pesquisas, Pontos e Campanhas)]
+    subgraph Camada_Persistencia ["Camada de Persistência"]
+        DB[("PostgreSQL<br/>Dados Comerciais, Pesquisas e Pontos")]
     end
 
-    subgraph Camada_Inteligencia [Camada de Processamento Analítico e Inteligência]
-        Pandas[Motor Analítico - Python / Pandas\nTratamento, Cruzamento e Padrões de Consumo]
-        IA[Serviço de IA Generativa\nInsights Estratégicos e Assistente Virtual]
+    subgraph Camada_Inteligencia ["Camada de Inteligência"]
+        Pandas["Motor Analítico (Pandas)<br/>Tratamento e Cruzamento de Dados"]
+        IA["Serviço de IA Generativa<br/>Insights Estratégicos"]
     end
 
-    B2C -->|POST /pesquisas e Resgates| API
-    B2B <-->|GET /indicadores e POST /vendas| API
-    API <-->|Transações Sanitizadas| DB
-    DB <-->|Extração e Agregação| Pandas
-    Pandas -->|Métricas Consolidadas| API
-    API <-->|Contexto Analítico| IA
+    B2C -->|"POST /pesquisas"| API
+    B2B <-->|"GET /indicadores"| API
+    API <-->|"Transações"| DB
+    DB -->|"Extração"| Pandas
+    Pandas -->|"Métricas"| API
+    API <-->|"Contexto"| IA
+```
 
-5.3 Fluxo Operacional
- * O visitante interage com os pontos de contato (QR Codes) do shopping, responde às pesquisas de preferência e acumula pontos para resgate de recompensas nas lojas participantes.
- * O lojista autentica-se na plataforma web e insere ou importa seus dados comerciais e de vendas.
- * A API em FastAPI valida, sanitiza os schemas e persiste todas as informações transacionais e comportamentais no PostgreSQL.
- * O motor analítico (Python e Pandas) processa e cruza os dados de vendas com o comportamento dos consumidores para identificar padrões e fatores de desempenho.
- * A inteligência artificial interpreta os resultados consolidados para gerar recomendações estratégicas e sugestões de parcerias entre lojas.
- * Os painéis gerenciais e o assistente virtual exibem os indicadores e insights de forma clara para apoiar a tomada de decisão do lojista.
-6. Plataforma e Tecnologias Adotadas
+### 5.3 Fluxo Operacional
+
+1. O visitante interage com os pontos de contato (QR Codes) do shopping, responde às pesquisas de preferência e acumula pontos para resgate de recompensas nas lojas participantes.
+2. O lojista autentica-se na plataforma web e insere ou importa seus dados comerciais e de vendas.
+3. A API em FastAPI valida, sanitiza os schemas e persiste todas as informações transacionais e comportamentais no PostgreSQL.
+4. O motor analítico (Python e Pandas) processa e cruza os dados de vendas com o comportamento dos consumidores para identificar padrões e fatores de desempenho.
+5. A inteligência artificial interpreta os resultados consolidados para gerar recomendações estratégicas e sugestões de parcerias entre lojas.
+6. Os painéis gerenciais e o assistente virtual exibem os indicadores e insights de forma clara para apoiar a tomada de decisão do lojista.
+
+---
+
+## 6. Plataforma e Tecnologias Adotadas
+
 | Componente | Tecnologia | Justificativa Técnica |
-|---|---|---|
+| :--- | :--- | :--- |
 | Interface do Usuário | Next.js (TypeScript) | Renderização otimizada, tipagem estática, componentização avançada e ecossistema maduro para construção de dashboards interativos. |
 | API e Regras de Negócio | Python + FastAPI | Alta performance para requisições assíncronas, validação automática de schemas (Pydantic) e facilidade de integração com modelos de IA. |
 | Processamento de Dados | Pandas (Python) | Eficiência nativa na limpeza, manipulação e análise de grandes volumes de dados tabulares e planilhas comerciais. |
@@ -162,28 +168,48 @@ flowchart TD
 | Inteligência Artificial | API de IA Generativa | Processamento de linguagem natural para interpretação de cenários de negócios e geração de recomendações estratégicas. |
 | Prototipação | Figma | Modelagem de interface e validação prévia de fluxos de navegação e usabilidade. |
 | Controle de Versão | Git e GitHub | Rastreabilidade de código, versionamento e suporte ao fluxo de trabalho colaborativo via GitHub Projects. |
-7. Incorporação da Tecnologia ou Prática Sorteada
-Nota: Preencher esta seção após a divulgação do sorteio realizado pela organização do evento.
- * Tecnologia ou Prática Sorteada: [PREENCHER COM A TECNOLOGIA OU PRÁTICA DEFINIDA PELA ORGANIZAÇÃO]
- * Forma de Incorporação:
-   * Camada de Aplicação: [Indicar o módulo ou camada da arquitetura onde será aplicada]
-   * Descrição Técnica: [Descrever como a tecnologia ou prática será integrada à plataforma VitrineIA, detalhando sua finalidade operacional e benefícios para lojistas ou consumidores]
-8. Governança e Tratamento de Dados
-8.1 Privacidade e Conformidade
+
+---
+
+## 7. Incorporação da Tecnologia ou Prática Sorteada
+
+> **Nota:** Preencher esta seção após a divulgação do sorteio realizado pela organização do evento.
+
+* **Tecnologia ou Prática Sorteada:** [PREENCHER COM A TECNOLOGIA OU PRÁTICA DEFINIDA PELA ORGANIZAÇÃO]
+* **Forma de Incorporação:**
+  * **Camada de Aplicação:** [Indicar o módulo ou camada da arquitetura onde será aplicada]
+  * **Descrição Técnica:** [Descrever como a tecnologia ou prática será integrada à plataforma VitrineIA, detalhando sua finalidade operacional e benefícios para lojistas ou consumidores]
+
+---
+
+## 8. Governança e Tratamento de Dados
+
+### 8.1 Privacidade e Conformidade
+
 O tratamento de informações na plataforma observa rigorosamente os princípios previstos na Lei Geral de Proteção de Dados (LGPD). O sistema prioriza o uso de dados estritamente agregados e anonimizados para a geração de insights analíticos para os lojistas, evitando a exposição desnecessária de informações sensíveis ou individuais dos visitantes do shopping.
-8.2 Integridade e Validação
+
+### 8.2 Integridade e Validação
+
 Todos os dados recebidos por meio de importações de planilhas, formulários de pesquisa ou integrações passam por etapas obrigatórias de validação de schema (via FastAPI/Pydantic) e saneamento (via Pandas) antes de serem persistidos e processados, mitigando riscos de inconsistência nas análises comerciais.
-9. Estrutura dos Repositórios
+
+---
+
+## 9. Estrutura dos Repositórios
+
 A organização Charizard-Rackarun está estruturada de forma modular nos seguintes repositórios:
- * docs: Documentação técnica, visão, arquitetura, requisitos e protótipos (Primeira Entrega).
- * frontend: Aplicação web em Next.js com TypeScript (Portal do Visitante e Dashboard do Lojista).
- * backend: API RESTful em Python com FastAPI e integração com PostgreSQL.
- * analytics-ia: Pipelines de tratamento em Pandas, scripts analíticos e integração com IA Generativa.
-10. Equipe e Responsabilidades
+
+* **docs:** Documentação técnica, visão, arquitetura, requisitos e protótipos (Primeira Entrega).
+* **frontend:** Aplicação web em Next.js com TypeScript (Portal do Visitante e Dashboard do Lojista).
+* **backend:** API RESTful em Python com FastAPI e integração com PostgreSQL.
+* **analytics-ia:** Pipelines de tratamento em Pandas, scripts analíticos e integração com IA Generativa.
+
+---
+
+## 10. Equipe e Responsabilidades
+
 | Integrante | Papel Principal | Responsabilidades |
-|---|---|---|
+| :--- | :--- | :--- |
 | Warly Martins | Tech Lead e Arquitetura | Arquitetura distribuída, modelagem do banco PostgreSQL, API FastAPI e integração de IA. |
 | [Nome Integrante 2] | UI/UX e Frontend | Prototipação no Figma, desenvolvimento das interfaces em Next.js e gráficos Chart.js. |
 | [Nome Integrante 3] | Engenharia de Dados e IA | Pipelines de análise com Pandas, estruturação da pesquisa e prompts de inteligência comercial. |
 | [Nome Integrante 4] | Documentação e Negócios | Especificação de requisitos, governança LGPD, validação de fluxos e apresentação. |
-
