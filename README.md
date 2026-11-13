@@ -174,12 +174,19 @@ flowchart TD
 
 ## 7. Incorporação da Tecnologia ou Prática Sorteada
 
-> **Nota:** Preencher esta seção após a divulgação do sorteio realizado pela organização do evento.
-
-* **Tecnologia ou Prática Sorteada:** [PREENCHER COM A TECNOLOGIA OU PRÁTICA DEFINIDA PELA ORGANIZAÇÃO]
+* **Tecnologia ou Prática Sorteada:** Pull Requests com revisão.
 * **Forma de Incorporação:**
-  * **Camada de Aplicação:** [Indicar o módulo ou camada da arquitetura onde será aplicada]
-  * **Descrição Técnica:** [Descrever como a tecnologia ou prática será integrada à plataforma VitrineIA, detalhando sua finalidade operacional e benefícios para lojistas ou consumidores]
+  * **Camada de Aplicação:** Processo de desenvolvimento, aplicado de forma transversal a todas as camadas da arquitetura e a todos os repositórios (`docs`, `frontend`, `backend` e `analytics-ia`). Por ser uma prática de engenharia, ela não altera a interface nem as regras de negócio, mas governa como cada alteração em qualquer camada chega à branch principal.
+  * **Descrição Técnica:** Nenhuma alteração entra na branch principal sem passar por um pull request revisado por outro integrante da equipe. A prática será integrada ao fluxo de trabalho da seguinte forma:
+    * **Proteção da branch principal:** configuração no GitHub para impedir commits diretos e exigir aprovação de revisão antes do merge.
+    * **Template de pull request:** modelo padronizado com descrição da mudança, motivação e checklist do autor, para dar contexto ao revisor.
+    * **Checklist de revisão alinhado à arquitetura:** o revisor verifica pontos críticos da plataforma, como validação de schema na API (Pydantic), tipagem no frontend (TypeScript), isolamento dos dados de cada estabelecimento e preservação da anonimização dos dados dos visitantes (LGPD).
+    * **Rastreabilidade:** pull requests vinculados às tarefas do GitHub Projects, mantendo o histórico de decisões técnicas.
+  * **Benefícios:**
+    * **Para a equipe:** maior qualidade e manutenibilidade do código, compartilhamento de conhecimento e detecção precoce de falhas.
+    * **Para lojistas e visitantes:** plataforma mais estável e maior segurança no tratamento de dados comerciais e pessoais, já que a revisão atua como uma barreira adicional contra erros que poderiam expor informações ou distorcer indicadores.
+
+O detalhamento do fluxo está na [seção 9.1](#91-fluxo-de-trabalho-e-política-de-revisão).
 
 ---
 
@@ -206,7 +213,7 @@ A organização Charizard-Rackarun está estruturada de forma modular nos seguin
 
 ### 9.1 Fluxo de Trabalho e Política de Revisão
 
-Em todos os repositórios, a equipe adota como obrigação o uso de **pull requests com revisão** para integrar qualquer alteração. O fluxo é o seguinte:
+Em todos os repositórios, a equipe adota como obrigação o uso de **pull requests com revisão** para integrar qualquer alteração, que é também a prática sorteada descrita na [seção 7](#7-incorporação-da-tecnologia-ou-prática-sorteada). O fluxo é o seguinte:
 
 1. **Branch própria:** cada tarefa é desenvolvida em uma branch criada a partir da branch principal, sem commits diretos na principal.
 2. **Abertura do pull request:** ao concluir a tarefa, o autor abre um pull request com descrição clara do que foi alterado e do motivo.
