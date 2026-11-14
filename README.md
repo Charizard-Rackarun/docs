@@ -9,6 +9,8 @@
 
 ## Sumário
 
+## Sumário
+
 1. [Visão Geral do Projeto](#1-visão-geral-do-projeto)
 2. [Proposta e Estrutura Inicial das Telas](#2-proposta-e-estrutura-inicial-das-telas)
 3. [Documentação Inicial do Projeto (Requisitos)](#3-documentação-inicial-do-projeto-requisitos)
@@ -18,7 +20,7 @@
 7. [Incorporação da Tecnologia ou Prática Sorteada](#7-incorporação-da-tecnologia-ou-prática-sorteada)
 8. [Governança e Tratamento de Dados](#8-governança-e-tratamento-de-dados)
 9. [Estrutura dos Repositórios e Fluxo de Trabalho](#9-estrutura-dos-repositórios-e-fluxo-de-trabalho)
-10. [Equipe e Responsabilidades](#10-equipe-e-responsabilidades)
+10. [Guia de Execução e Instalação Local (Repositório Infra)]
 
 ---
 
@@ -223,13 +225,133 @@ Em todos os repositórios, a equipe adota como obrigação o uso de **pull reque
 
 Essa prática favorece a qualidade e a manutenibilidade do código (RNF06 e RNF07), o compartilhamento de conhecimento entre os integrantes e a rastreabilidade das decisões técnicas via GitHub.
 
+Aqui está a documentação técnica da **VitrineIA** atualizada e completa, incorporando a nova seção dedicada ao **Guia de Instalação e Execução Local** (referenciando o repositório `infra`), estruturada de forma profissional e alinhada com o restante do documento.
+
 ---
 
-## 10. Equipe e Responsabilidades
 
-| Integrante | Papel Principal | Responsabilidades |
-| :--- | :--- | :--- |
-| Kelwen Lourenço | A confirmar | A confirmar |
-| Carlos | A confirmar | A confirmar |
-| Thiago | A confirmar | A confirmar |
-| Warly Martins | A confirmar | A confirmar |
+## 10. Guia de Execução e Instalação Local (Repositório Infra)
+
+Para facilitar a orquestração e execução integrada de todos os microsserviços da VitrineIA na máquina de desenvolvimento, o repositório central **`infra`** agrupa o ecossistema utilizando o **Docker Compose**.
+
+### 10.1 Pré-requisitos do Sistema
+
+Antes de iniciar, certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
+
+* **Git** (`git --version`)
+* **Docker** (`docker --version`)
+* **Docker Compose** (`docker compose version`)
+
+> *Nota para Linux (Ubuntu/Debian):* Certifique-se de que o serviço do Docker está ativo (`sudo systemctl start docker`) e que seu usuário possui permissão para executá-lo sem o uso de `sudo`.
+
+---
+
+### 10.2 Passo a Passo para Instalação e Execução
+
+Siga as etapas abaixo no terminal para baixar o projeto, configurar as variáveis de ambiente e subir a infraestrutura completa:
+
+#### 1. Clonar o Repositório de Infraestrutura
+
+Baixe o código-fonte do repositório `infra` e acesse a pasta raiz do projeto:
+
+```bash
+git clone https://github.com/Charizard-Rackarun/infra.git
+cd infra
+
+```
+
+#### 2. Configurar as Variáveis de Ambiente (`.env`)
+
+O projeto disponibiliza arquivos de modelo de configuração tanto para o microsserviço de backend quanto para o frontend. Duplique-os para criar os arquivos `.env` locais:
+
+* **No Linux / macOS / Git Bash:**
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
+
+```
+
+
+* **No Windows (PowerShell):**
+```powershell
+copy backend\.env.example backend\.env
+copy frontend\.env.example frontend\.env
+
+```
+
+
+
+> **Importante:** Abra os arquivos `backend/.env` e `frontend/.env` gerados e preencha as credenciais necessárias (como URL do banco de dados, chaves secretas de JWT e portas de comunicação) de acordo com o seu ambiente local antes de prosseguir.
+
+#### 3. Construir e Subir os Containers com Docker Compose
+
+Na pasta raiz do projeto (`infra/`), execute o comando abaixo para realizar o build das imagens e iniciar todos os serviços em segundo plano (*detached mode*):
+
+```bash
+docker compose up -d --build
+
+```
+
+* `--build`: Assegura que as imagens do `backend` e `frontend` sejam recompiladas com as dependências mais recentes.
+* `-d`: Executa os containers em segundo plano, liberando o terminal.
+
+#### 4. Executar as Migrações do Banco de Dados (Alembic)
+
+Com os containers ativos, aplique as migrações estruturais do banco de dados para criar as tabelas no PostgreSQL:
+
+```bash
+docker compose exec backend alembic revision --autogenerate -m "Atualiza o banco"
+docker compose exec backend alembic upgrade head
+
+```
+
+#### 5. Acessar a Aplicação
+
+Após a inicialização completa, os serviços estarão disponíveis nos seguintes endereços locais:
+
+* **Frontend (Aplicação Web / Dashboards):** `http://localhost:3000`
+* **Backend (API REST / Documentação Swagger UI):** `http://localhost:8000/docs`
+
+---
+
+### 10.3 Comandos Úteis de Gerenciamento (Docker)
+
+Gerencie o ciclo de vida dos containers utilizando os comandos abaixo na raiz do repositório `infra`:
+
+* **Verificar o status dos containers em execução:**
+```bash
+docker compose ps
+
+```
+
+
+* **Visualizar os logs em tempo real (todos os serviços):**
+```bash
+docker compose logs -f
+
+```
+
+
+* **Visualizar logs de um serviço específico (ex: `backend` ou `frontend`):**
+```bash
+docker compose logs -f backend
+
+```
+
+
+* **Parar os containers de forma segura:**
+```bash
+docker compose stop
+
+```
+
+
+* **Parar e remover os containers e redes criados:**
+```bash
+docker compose down
+
+```
+
+
+*(Dica: Adicione a flag `-v` — `docker compose down -v` — caso deseje limpar também os volumes de dados persistidos no PostgreSQL).*
+
